@@ -134,7 +134,7 @@ async function loadClientes(filters = {}) {
             });
 
             function handleEditOrDelete(cliente, action) {
-                const userId = localStorage.getItem('userId'); // Verifica se existe um userId no localStorage
+                const userId = sessionStorage.getItem('userId'); // Verifica se existe um userId no sessionStorage
 
                 if (!userId) {
                     createNotification("É necessário autenticar para editar ou excluir empresas.", 'salmon', 'red')
@@ -456,8 +456,8 @@ function renderizarDetalhesCliente(clienteDetalhes) {
 
     // Event listener para abrir o dialog de seleção de arquivos
     document.getElementById('upload-button').addEventListener('click', function () {
-        // Verifica se o userId está no localStorage
-        const userId = localStorage.getItem('userId');
+        // Verifica se o userId está no sessionStorage
+        const userId = sessionStorage.getItem('userId');
 
         if (!userId) {
             createNotification("É necessário autenticar para adicionar um arquivo.", 'salmon', 'red');
@@ -699,8 +699,8 @@ async function loadArquivos(clienteId) {
             deleteIcon.addEventListener('click', async (event) => {
                 event.stopPropagation();
 
-                // Verifica se o userId está no localStorage
-                const userId = localStorage.getItem('userId');
+                // Verifica se o userId está no sessionStorage
+                const userId = sessionStorage.getItem('userId');
 
                 if (!userId) {
                     createNotification("É necessário autenticar para excluir um arquivo.", 'salmon', 'red');
@@ -972,7 +972,7 @@ function setEventListeners() {
 
 // Adiciona o evento de clique ao botão "Adicionar Empresa"
 document.getElementById('add-empresa').addEventListener('click', () => {
-    const userId = localStorage.getItem('userId'); // Pega o userId do localStorage
+    const userId = sessionStorage.getItem('userId'); // Pega o userId do sessionStorage
 
     // Se userId existir, continue e exiba o formulário
     if (userId) {

@@ -8,7 +8,7 @@ async function handleLogin(event) {
         const response = await window.electron.invoke('fazer-login', { username, password });
         console.log('Resposta do IPC:', response);
         if (response.success) {
-            localStorage.setItem('userId', response.user.id);
+            sessionStorage.setItem('userId', response.user.id);
             createNotification("Autenticado com sucesso!", 'lightgreen', 'green');
         
             // Limpa os campos do formulário após login bem-sucedido

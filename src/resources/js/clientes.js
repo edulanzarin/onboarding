@@ -201,7 +201,7 @@ function deleteCliente(cliente) {
 
 // Função para editar cliente
 function editCliente(cliente) {
-    const formHTML = getFormHTML(); 
+    const formHTML = getFormHTMLEdit(); 
     const formContainer = document.getElementById('detalhes-cliente');
     // Adiciona o HTML do formulário no contêiner
     formContainer.innerHTML = formHTML;
@@ -303,7 +303,7 @@ function createFileUploadSection() {
     const uploadButton = document.createElement('button');
     uploadButton.id = 'upload-button';
     uploadButton.classList.add('upload-btn');
-    uploadButton.textContent = 'Upload Arquivo';
+    uploadButton.textContent = 'Adicionar Arquivo';
 
     const uploadText = document.createElement('p');
     uploadText.classList.add('upload-text');
@@ -415,7 +415,7 @@ function renderizarDetalhesCliente(clienteDetalhes) {
             <div class="file-column">
                 <div class="file-upload-container" id="file-upload-container">
                     <input type="file" class="file-input" id="file-upload" style="display: none;" />
-                    <button id="upload-button" class="upload-btn">Upload Arquivo</button>
+                    <button id="upload-button" class="upload-btn">Adicionar Arquivo</button>
                     <p class="upload-text">Selecione um arquivo para fazer o upload</p>
                 </div>
             </div>
@@ -455,7 +455,16 @@ function renderizarDetalhesCliente(clienteDetalhes) {
     });
 
     // Event listener para abrir o dialog de seleção de arquivos
-document.getElementById('upload-button').addEventListener('click', uploadFile);
+    document.getElementById('upload-button').addEventListener('click', function () {
+        // Verifica se o userId está no localStorage
+        const userId = localStorage.getItem('userId');
+
+        if (!userId) {
+            createNotification("É necessário autenticar para adicionar um arquivo.", 'salmon', 'red');
+        } else {
+            uploadFile();
+        }
+    });
 }
 
 // Event listener para exibir detalhes do cliente ao clicar em um cartão
@@ -689,11 +698,19 @@ async function loadArquivos(clienteId) {
             const deleteIcon = fileCard.querySelector('.file-delete-icon');
             deleteIcon.addEventListener('click', async (event) => {
                 event.stopPropagation();
-                
+
+                // Verifica se o userId está no localStorage
+                const userId = localStorage.getItem('userId');
+
+                if (!userId) {
+                    createNotification("É necessário autenticar para excluir um arquivo.", 'salmon', 'red');
+                    return; // Sai da função se o usuário não estiver autenticado
+                }
+
                 // Atualiza a mensagem do modal
                 const modalMessage = document.getElementById('modalMessage');
                 modalMessage.textContent = `Você tem certeza que deseja excluir o arquivo "${nomeArquivo}"?`;
-                
+
                 // Mostra o modal
                 const modal = document.getElementById('deleteModal');
                 modal.style.display = "block";
@@ -702,7 +719,7 @@ async function loadArquivos(clienteId) {
                 const confirmButton = document.getElementById('confirmDelete');
                 confirmButton.onclick = async () => {
                     const resultado = await window.electron.invoke('delete-file', arquivo.ID);
-                    
+
                     if (resultado.success) {
                         console.log(resultado.message);
                         // Atualize a lista de arquivos
@@ -710,7 +727,7 @@ async function loadArquivos(clienteId) {
                     } else {
                         console.error('Erro ao excluir arquivo:', resultado.message);
                     }
-                    
+
                     // Fecha o modal
                     modal.style.display = "none";
                 };
@@ -860,9 +877,9 @@ function updateNotificationPositions() {
 }
 
 // Função para gerar o HTML do formulário
-function getFormHTML() {
+function getFormHTMLEdit() {
     return `
-        <h2 class="empresa-title">Adicionar Empresa</h2> 
+        <h2 class="empresa-title">Editar Empresa</h2> 
         <form id="form-detalhes" class="formulario-detalhes">
             <div class="form-row">
                 <div class="form-column">
@@ -1168,6 +1185,6 @@ async function adicionarCliente() {
 document.addEventListener('DOMContentLoaded', () => {
     // Seu código de inicialização aqui
     loadClientes(); 
-    setEventListeners(); // Defina os event listeners após o DOM estar carregado
+    setEventListeners();
 });
 

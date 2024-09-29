@@ -6,9 +6,11 @@
     "start": "electron ."
   },
   "dependencies": {
+    "axios": "^1.7.7",
     "electorn": "^0.0.1-security",
     "electron": "^latest",
     "electron-store": "^10.0.0",
+    "googleapis": "^144.0.0",
     "node-adodb": "^5.0.3",
     "odbc": "^2.4.9"
   },

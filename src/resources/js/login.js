@@ -1,6 +1,5 @@
 async function handleLogin(event) {
-    event.preventDefault(); // Evita o envio padrão do formulário
-    console.log('Tentativa de login...'); 
+    event.preventDefault(); 
 
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
@@ -16,11 +15,13 @@ async function handleLogin(event) {
             document.getElementById('username').value = '';
             document.getElementById('password').value = '';
         } else {
-            alert(response.message);
+            // Substitui o alerta pela notificação personalizada
+            createNotification(response.message, 'salmon', 'red');
         }
     } catch (error) {
         console.error('Erro ao fazer login:', error);
-        alert('Erro ao fazer login. Tente novamente.');
+        // Substitui o alerta pela notificação personalizada
+        createNotification('Erro ao fazer login. Tente novamente.', 'salmon', 'red');
     }
 }
 

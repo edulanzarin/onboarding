@@ -1,0 +1,146 @@
+/* Reset CSS */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+	cursor: url('../images/cursor.png'), auto; /* Cursor personalizado */
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Header */
+.large-header {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Canvas */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Conteúdo */
+.content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: #f9f1e9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.main-title {
+    font-size: 4.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1em;
+    display: inline-block;
+    animation: titleFloat 2s ease-in-out infinite alternate; /* Animação do título */
+}
+
+/* Animação do título */
+@keyframes titleFloat {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Animação inicial das letras */
+.main-title span {
+    display: inline-block;
+    opacity: 0; /* Começa invisível */
+    animation: appear 0.6s forwards; /* Aparece com animação */
+}
+
+/* Animação de surgimento */
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Efeito de hover nas letras */
+.main-title span:hover {
+    color: #00BFFF; /* Cor azul ao passar o mouse */
+    transform: translateY(-10px); /* Efeito de subir */
+    transition: transform 0.3s, color 0.3s; /* Animação suave */
+}
+
+/* Estilos do botão */
+.entrar-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s, transform 0.3s;
+    animation: pulse 1.5s infinite; /* Efeito de pulsar */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.entrar-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: linear-gradient(45deg, #00BFFF, #1E90FF);
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+    z-index: 0;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.entrar-button:hover::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.entrar-button:hover {
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.entrar-button:focus {
+    outline: none;
+}

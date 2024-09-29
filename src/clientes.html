@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding</title>
+    <link rel="icon" href="resources/images/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="resources/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Confirmação de Exclusão</h2>
+            <p id="modalMessage"></p>
+            <div class="modal-actions">
+                <button id="confirmDelete" class="confirm-btn">Excluir</button>
+                <button id="cancelDelete" class="cancel-btn"></button>
+            </div>
+        </div>
+    </div>
+    
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fa-solid fa-house"></i><p>Início</p></a></li>
+                <li><i class="fa-solid fa-user"></i><p>Clientes</p></li>
+                <li><a href="login.html"><i class="fa-solid fa-key"></i><p>Liberar</p></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container-content">
+        <div class="container-clientes">
+            <div class="left-side">
+                <h2>Clientes</h2>
+    
+                <div class="filtros-expansivo">
+                    <button class="expand-btn" onclick="toggleFiltros()">Filtros</button>
+    
+                    <div id="filtros-content" class="filtros-content">
+                        <div class="filtros-content-one">
+                            <input type="text" id="nmr-questor" placeholder="Número">
+                            <input type="text" id="cnpj" placeholder="CNPJ">
+                        </div>
+                        <input type="text" id="nome" placeholder="Razão Social">
+                        
+                        <button class="confirm-btn" onclick="filtrarClientes()">Filtrar</button>
+                    </div>
+                </div>
+
+                <div class="lista-clientes" id="lista-clientes">
+                    <!-- Os cartões de clientes serão adicionados aqui dinamicamente -->
+                </div>
+                <div class="lista-button">
+                    <button class="add-empresa" id="add-empresa">Adicionar Empresa</button>
+                </div>
+            </div>
+            <div class="right-side" id="detalhes-cliente">
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="resources/js/clientes.js"></script>
+</body>
+</html>
